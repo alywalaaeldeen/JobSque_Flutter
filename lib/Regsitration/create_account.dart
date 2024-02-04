@@ -15,6 +15,7 @@ class _CreateAccountState extends State<CreateAccount> {
   final TextEditingController emailController = TextEditingController();
 
   final TextEditingController passwordController = TextEditingController();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   bool isObscure = true;
 
   // final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
@@ -49,6 +50,7 @@ class _CreateAccountState extends State<CreateAccount> {
                   height: 30,
                 ),
                 Form(
+                  key: _formKey,
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Column(
@@ -145,11 +147,15 @@ class _CreateAccountState extends State<CreateAccount> {
                         ),
                         ElevatedButton(
                           onPressed: () {
-                            Navigator.of(context).pushAndRemoveUntil(
-                                MaterialPageRoute(
-                                  builder: ((context) => const WorkType()),
-                                ),
-                                (route) => false);
+                            if (_formKey.currentState!.validate()) {
+                              Navigator.of(context).pushAndRemoveUntil(
+                                  MaterialPageRoute(
+                                    builder: ((context) => const WorkType()),
+                                  ),
+                                  (route) => false);
+                            } else {
+                              return;
+                            }
                           },
                           style: ElevatedButton.styleFrom(
                               minimumSize: const Size(327, 48),

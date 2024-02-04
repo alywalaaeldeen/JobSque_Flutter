@@ -77,8 +77,8 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
         actions: [
           TextButton(
               onPressed: () {
-                Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) =>  const CreateAccount()));
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => const CreateAccount()));
               },
               child: const Text("Skip"))
         ],
@@ -101,7 +101,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                 } else {
                   Navigator.of(context).pushAndRemoveUntil(
                       MaterialPageRoute(
-                          builder: (context) => const HomeScreen()),
+                          builder: (context) => const CreateAccount()),
                       (route) => false);
                 }
               });
