@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:jobsque/Login/login_screen.dart';
 import 'package:jobsque/Regsitration/work_type_screen.dart';
 
 class CreateAccount extends StatefulWidget {
@@ -24,11 +25,12 @@ class _CreateAccountState extends State<CreateAccount> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: SvgPicture.asset(
-          "assets/images/Logo.svg",
-          width: 40,
-          height: 30,
-        ),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.all(15.0),
+            child: SvgPicture.asset("assets/images/Logo.svg"),
+          )
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(10.0),
@@ -124,26 +126,33 @@ class _CreateAccountState extends State<CreateAccount> {
                           autovalidateMode: AutovalidateMode.onUserInteraction,
                         ),
                         const SizedBox(
-                          height: 150,
+                          height: 120,
                         ),
-                        RichText(
-                          text: TextSpan(
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              "Already have an account?",
                               style: TextStyle(
-                                  fontSize: 14, color: Colors.grey.shade700),
-                              children: [
-                                const TextSpan(
-                                    text: "Already have an account? "),
-                                WidgetSpan(
-                                    child: GestureDetector(
-                                        child: const Text(
+                                  fontSize: 14, color: Colors.grey.shade600),
+                            ),
+                            TextButton(
+                                onPressed: () {
+                                  Navigator.of(context).pushAndRemoveUntil(
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              const LoginScreen()),
+                                      (route) => false);
+                                },
+                                child: const Text(
                                   "Login",
                                   style: TextStyle(
-                                      color: Colors.blue, fontSize: 14),
-                                )))
-                              ]),
+                                      fontSize: 14, color: Colors.blue),
+                                ))
+                          ],
                         ),
                         const SizedBox(
-                          height: 10,
+                          height: 15,
                         ),
                         ElevatedButton(
                           onPressed: () {
@@ -166,10 +175,82 @@ class _CreateAccountState extends State<CreateAccount> {
                         const SizedBox(
                           height: 10,
                         ),
-                        Text(
-                          "Or Sign up With Account",
-                          style: TextStyle(
-                              fontSize: 14, color: Colors.grey.shade700),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SizedBox(
+                              width: 95,
+                              child: Divider(
+                                color: Colors.grey.shade600,
+                                indent: 0,
+                                endIndent: 8,
+                                thickness: 1,
+                              ),
+                            ),
+                            Text(
+                              "Or Sign up With Account",
+                              style: TextStyle(
+                                  fontSize: 14, color: Colors.grey.shade700),
+                            ),
+                            SizedBox(
+                              width: 95,
+                              child: Divider(
+                                color: Colors.grey.shade600,
+                                indent: 10,
+                                endIndent: 0,
+                                thickness: 1,
+                              ),
+                            )
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            ElevatedButton(
+                              onPressed: () {},
+                              style: ElevatedButton.styleFrom(
+                                  minimumSize: const Size(150, 50),
+                                  shape: const RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10)))),
+                              child: Row(
+                                children: [
+                                  SvgPicture.asset("assets/images/google.svg"),
+                                  const SizedBox(
+                                    width: 5,
+                                  ),
+                                  const Text(
+                                    "Google",
+                                    style: TextStyle(color: Colors.black),
+                                  )
+                                ],
+                              ),
+                            ),
+                            ElevatedButton(
+                              onPressed: () {},
+                              style: ElevatedButton.styleFrom(
+                                  minimumSize: const Size(150, 50),
+                                  shape: const RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10)))),
+                              child: Row(
+                                children: [
+                                  SvgPicture.asset(
+                                      "assets/images/Facebook.svg"),
+                                  const SizedBox(
+                                    width: 5,
+                                  ),
+                                  const Text(
+                                    "Facebook",
+                                    style: TextStyle(color: Colors.black),
+                                  )
+                                ],
+                              ),
+                            )
+                          ],
                         )
                       ],
                     ),
