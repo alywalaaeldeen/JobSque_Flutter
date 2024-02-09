@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:jobsque/SearchScreens/search_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -12,7 +13,6 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     int currentSelectedScreenIndex = 0;
-    TextEditingController searchController = TextEditingController();
     return Scaffold(
         appBar: AppBar(
           title: Padding(
@@ -54,20 +54,39 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: Column(children: [
                   Form(
                     child: SizedBox(
-                      height: 50,
-                      child: TextFormField(
-                        controller: searchController,
-                        decoration: InputDecoration(
-                            label: Text(
-                              "Search....",
-                              style: TextStyle(
-                                  fontSize: 14, color: Colors.grey.shade500),
+                        height: 50,
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => const SearchScreen(
+                                    isSearched: false, isfound: false)));
+                          },
+                          child: Container(
+                            width: 350,
+                            height: 50,
+                            decoration: BoxDecoration(
+                                border: Border.all(
+                                  color: Colors.black,
+                                ),
+                                borderRadius: const BorderRadius.all(
+                                    Radius.circular(30))),
+                            child: Row(
+                              children: [
+                                const Padding(
+                                  padding: EdgeInsets.all(10.0),
+                                  child: Icon(Icons.search),
+                                ),
+                                const SizedBox(
+                                  width: 15,
+                                ),
+                                Text("Search....",
+                                    style: TextStyle(
+                                        fontSize: 14,
+                                        color: Colors.grey.shade700))
+                              ],
                             ),
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(30)),
-                            prefixIcon: const Icon(Icons.search)),
-                      ),
-                    ),
+                          ),
+                        )),
                   ),
                   const SizedBox(
                     height: 15,
@@ -329,9 +348,10 @@ class RecentJobItem extends StatefulWidget {
 }
 
 class _RecentJobItemState extends State<RecentJobItem> {
+  bool isfavorite = false;
+
   @override
   Widget build(BuildContext context) {
-    bool isfavorite = false;
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Column(children: [
