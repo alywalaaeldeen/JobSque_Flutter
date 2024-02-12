@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:jobsque/HomeScreen/home_screen.dart';
-import 'package:jobsque/Job%20Detail/job_detail.dart';
-import 'package:jobsque/onboarding_screens.dart/onboarding_screen.dart';
-// import 'package:jobsque/SearchScreens/result_screen.dart';
+import 'package:jobsque/HomeScreen/applied_home_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -22,6 +19,8 @@ class MyApp extends StatelessWidget {
               seedColor: const Color.fromARGB(1, 51, 102, 255)),
           useMaterial3: true,
         ),
-        home: const JobDetail());
+        home: const AppliedHomeScreen(
+          isAccepted: false,
+        ));
   }
 }

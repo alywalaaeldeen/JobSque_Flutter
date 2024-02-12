@@ -142,7 +142,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   const RecentJobItem(
                       jobName: "Senior UI Designer",
-                      companyLogo: "assets/images/twitter.svg",
+                      companyLogo: "assets/images/TwitterLogo.svg",
                       companyAndLocation: "Twitter • Jakarta, Indonesia "),
                   SizedBox(
                     width: 400,
@@ -153,7 +153,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   const RecentJobItem(
                       jobName: "Senior UI Designer",
-                      companyLogo: "assets/images/twitter.svg",
+                      companyLogo: "assets/images/TwitterLogo.svg",
                       companyAndLocation: "Twitter • Jakarta, Indonesia "),
                 ]),
               ),

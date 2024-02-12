@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:jobsque/Job%20Detail/bio_data.dart';
 
 class JobDetail extends StatefulWidget {
   const JobDetail({super.key});
@@ -34,9 +35,8 @@ class _JobDetailState extends State<JobDetail> {
                   height: 50,
                   decoration: BoxDecoration(
                     borderRadius: const BorderRadius.all(Radius.circular(10)),
-                    color: Colors.blue.shade700,
                   ),
-                  child: SvgPicture.asset("assets/images/twitter.svg")),
+                  child: SvgPicture.asset("assets/images/TwitterLogo.svg")),
               const SizedBox(
                 height: 10,
               ),
@@ -163,23 +163,29 @@ class _JobDetailState extends State<JobDetail> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
+                              SizedBox(
+                                width: double.infinity,
+                              ),
                               Text(
                                 "Job Description",
                                 style: TextStyle(
                                     fontSize: 14, fontWeight: FontWeight.w500),
                               ),
-                              Text(
-                                "........",
-                                style: TextStyle(
-                                    fontSize: 12, color: Colors.grey.shade600),
-                              ),
                               const SizedBox(
                                 height: 10,
                               ),
                               Text(
-                                "Skills Required",
+                                ".......",
+                                style: TextStyle(
+                                    fontSize: 12, color: Colors.grey.shade600),
+                              ),
+                              Text(
+                                "Skills Required1",
                                 style: TextStyle(
                                     fontSize: 14, fontWeight: FontWeight.w500),
+                              ),
+                              const SizedBox(
+                                height: 10,
                               ),
                               Text(
                                 ".......",
@@ -195,7 +201,10 @@ class _JobDetailState extends State<JobDetail> {
                         Positioned(
                           bottom: 5,
                           child: ElevatedButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: ((context) => ApplyJobScreen())));
+                              },
                               style: ElevatedButton.styleFrom(
                                   minimumSize: Size(350, 50),
                                   backgroundColor: Colors.blue),
@@ -314,7 +323,12 @@ class _JobDetailState extends State<JobDetail> {
                             Positioned(
                               bottom: 5,
                               child: ElevatedButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                            builder: ((context) =>
+                                                ApplyJobScreen())));
+                                  },
                                   style: ElevatedButton.styleFrom(
                                       minimumSize: Size(350, 50),
                                       backgroundColor: Colors.blue),
@@ -410,7 +424,12 @@ class _JobDetailState extends State<JobDetail> {
                             Positioned(
                               bottom: 5,
                               child: ElevatedButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                            builder: ((context) =>
+                                                ApplyJobScreen())));
+                                  },
                                   style: ElevatedButton.styleFrom(
                                       minimumSize: Size(350, 50),
                                       backgroundColor: Colors.blue),
