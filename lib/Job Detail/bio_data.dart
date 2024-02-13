@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:jobsque/Job%20Detail/type_of_work.dart';
 
-class ApplyJobScreen extends StatelessWidget {
-  const ApplyJobScreen({super.key});
+class BioDataScreen extends StatelessWidget {
+  BioDataScreen({super.key});
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController phoneController = TextEditingController();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -121,80 +126,85 @@ class ApplyJobScreen extends StatelessWidget {
               height: 20,
             ),
             Form(
+                key: _formKey,
                 child: Expanded(
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    TextFormField(
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return "Please enter your full name.";
-                          }
-                          return null;
-                        },
-                        keyboardType: TextInputType.name,
-                        decoration: const InputDecoration(
-                          prefixIcon: Icon(Icons.person),
-                          border: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10))),
-                          label: Text("Full Name"),
-                        )),
-                    const SizedBox(
-                      height: 30,
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        TextFormField(
+                            controller: nameController,
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return "Please enter your full name.";
+                              }
+                              return null;
+                            },
+                            keyboardType: TextInputType.name,
+                            decoration: const InputDecoration(
+                              prefixIcon: Icon(Icons.person),
+                              border: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10))),
+                              label: Text("Full Name"),
+                            )),
+                        const SizedBox(
+                          height: 30,
+                        ),
+                        TextFormField(
+                            controller: emailController,
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return "Please enter your email.";
+                              }
+                              return null;
+                            },
+                            keyboardType: TextInputType.emailAddress,
+                            decoration: const InputDecoration(
+                              prefixIcon: Icon(Icons.email),
+                              border: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10))),
+                              label: Text("Email"),
+                            )),
+                        const SizedBox(
+                          height: 30,
+                        ),
+                        IntlPhoneField(
+                          validator: (value) {
+                            if (value == null || !value.isValidNumber()) {
+                              return "Please enter your email.";
+                            }
+                            return null;
+                          },
+                          controller: phoneController,
+                          decoration: const InputDecoration(
+                              border: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10))),
+                              label: Text("Phone Number")),
+                        ),
+                        const SizedBox(
+                          height: 180,
+                        ),
+                        ElevatedButton(
+                            onPressed: () {
+                              if (_formKey.currentState!.validate()) {
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (context) => const TypeOfWork()));
+                              }
+                              return;
+                            },
+                            style: ElevatedButton.styleFrom(
+                                minimumSize: const Size(350, 50),
+                                backgroundColor: Colors.blue),
+                            child: const Text(
+                              "Next",
+                              style: TextStyle(color: Colors.white),
+                            ))
+                      ],
                     ),
-                    TextFormField(
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return "Please enter your full name.";
-                          }
-                          return null;
-                        },
-                        keyboardType: TextInputType.emailAddress,
-                        decoration: const InputDecoration(
-                          prefixIcon: Icon(Icons.email),
-                          border: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10))),
-                          label: Text("Email"),
-                        )),
-                    const SizedBox(
-                      height: 30,
-                    ),
-                    TextFormField(
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return "Please enter your full name.";
-                          }
-                          return null;
-                        },
-                        keyboardType: TextInputType.number,
-                        decoration: const InputDecoration(
-                          prefixIcon: Icon(Icons.phone),
-                          label: Text("Phone Number"),
-                          border: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10))),
-                        )),
-                    const SizedBox(
-                      height: 200,
-                    ),
-                    ElevatedButton(
-                        onPressed: () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => const TypeOfWork()));
-                        },
-                        style: ElevatedButton.styleFrom(
-                            minimumSize: const Size(350, 50),
-                            backgroundColor: Colors.blue),
-                        child: const Text(
-                          "Next",
-                          style: TextStyle(color: Colors.white),
-                        ))
-                  ],
-                ),
-              ),
-            )),
+                  ),
+                )),
           ],
         ),
       ),

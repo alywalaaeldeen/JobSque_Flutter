@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:jobsque/HomeScreen/applied_home_screen.dart';
+import 'package:jobsque/Job%20Detail/bio_data.dart';
+import 'package:jobsque/Login/login_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -19,8 +21,6 @@ class MyApp extends StatelessWidget {
               seedColor: const Color.fromARGB(1, 51, 102, 255)),
           useMaterial3: true,
         ),
-        home: const AppliedHomeScreen(
-          isAccepted: false,
-        ));
+        home: const LoginScreen());
   }
 }

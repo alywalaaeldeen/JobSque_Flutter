@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:jobsque/HomeScreen/applied_home_screen.dart';
+import 'package:jobsque/ForgotPassword/change_password.dart';
+import 'package:jobsque/HomeScreen/home_screen.dart';
 
-class SuccessfullScreen extends StatelessWidget {
-  const SuccessfullScreen({super.key});
+class EmailSentScreen extends StatelessWidget {
+  const EmailSentScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -15,12 +16,12 @@ class SuccessfullScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SvgPicture.asset("assets/images/success.svg"),
+            SvgPicture.asset("assets/images/emailSent.svg"),
             const SizedBox(
               height: 15,
             ),
             const Text(
-              "Your data has been successfully sent",
+              "Check your Email",
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 24),
             ),
@@ -28,7 +29,7 @@ class SuccessfullScreen extends StatelessWidget {
               height: 15,
             ),
             Text(
-              "You will get a message from our team, about the announcement of employee acceptance",
+              "We have sent a reset password to your email address",
               style: TextStyle(color: Colors.grey.shade500, fontSize: 14),
             ),
             const SizedBox(
@@ -38,16 +39,14 @@ class SuccessfullScreen extends StatelessWidget {
                 onPressed: () {
                   Navigator.of(context).pushAndRemoveUntil(
                       MaterialPageRoute(
-                          builder: (context) => const AppliedHomeScreen(
-                                isAccepted: false,
-                              )),
+                          builder: (context) => const ChangePasswordScreen()),
                       (route) => false);
                 },
                 style: ElevatedButton.styleFrom(
                     minimumSize: const Size(350, 50),
                     backgroundColor: Colors.blue),
                 child: const Text(
-                  "Back to Home",
+                  "Change password",
                   style: TextStyle(color: Colors.white, fontSize: 16),
                 ))
           ],

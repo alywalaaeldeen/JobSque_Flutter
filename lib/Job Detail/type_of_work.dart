@@ -179,7 +179,7 @@ class _TypeOfWorkItemState extends State<TypeOfWorkItem> {
                 });
               },
               icon: (isChecked)
-                  ? const Icon(Icons.radio_button_checked)
+                  ? const Icon(Icons.radio_button_checked , color: Colors.blue,)
                   : const Icon(Icons.radio_button_off_rounded)),
         ),
       ),

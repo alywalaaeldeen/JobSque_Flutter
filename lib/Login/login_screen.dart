@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:jobsque/ForgotPassword/reset_password.dart';
 import 'package:jobsque/HomeScreen/home_screen.dart';
 import 'package:jobsque/Regsitration/create_account.dart';
 
@@ -120,7 +121,11 @@ class _LoginScreenState extends State<LoginScreen> {
                           ],
                         ),
                         TextButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: ((context) =>
+                                      ResetPasswordScreen())));
+                            },
                             child: const Text(
                               "Forgot Password?",
                               style:

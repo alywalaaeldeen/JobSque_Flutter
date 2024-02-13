@@ -203,7 +203,7 @@ class _JobDetailState extends State<JobDetail> {
                           child: ElevatedButton(
                               onPressed: () {
                                 Navigator.of(context).push(MaterialPageRoute(
-                                    builder: ((context) => ApplyJobScreen())));
+                                    builder: ((context) => BioDataScreen())));
                               },
                               style: ElevatedButton.styleFrom(
                                   minimumSize: Size(350, 50),
@@ -327,7 +327,7 @@ class _JobDetailState extends State<JobDetail> {
                                     Navigator.of(context).push(
                                         MaterialPageRoute(
                                             builder: ((context) =>
-                                                ApplyJobScreen())));
+                                                BioDataScreen())));
                                   },
                                   style: ElevatedButton.styleFrom(
                                       minimumSize: Size(350, 50),
@@ -428,7 +428,7 @@ class _JobDetailState extends State<JobDetail> {
                                     Navigator.of(context).push(
                                         MaterialPageRoute(
                                             builder: ((context) =>
-                                                ApplyJobScreen())));
+                                                BioDataScreen())));
                                   },
                                   style: ElevatedButton.styleFrom(
                                       minimumSize: Size(350, 50),
