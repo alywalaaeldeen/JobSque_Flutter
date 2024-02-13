@@ -14,26 +14,31 @@ class EmailSentScreen extends StatelessWidget {
           child: Padding(
         padding: const EdgeInsets.all(40.0),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SvgPicture.asset("assets/images/emailSent.svg"),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SvgPicture.asset("assets/images/emailSent.svg"),
+                const SizedBox(
+                  height: 15,
+                ),
+                const Text(
+                  "Check your Email",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 24),
+                ),
+                const SizedBox(
+                  height: 15,
+                ),
+                Text(
+                  "We have sent a reset password to your email address",
+                  style: TextStyle(color: Colors.grey.shade500, fontSize: 14),
+                  textAlign: TextAlign.center,
+                ),
+              ],
+            ),
             const SizedBox(
-              height: 15,
-            ),
-            const Text(
-              "Check your Email",
-              textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 24),
-            ),
-            const SizedBox(
-              height: 15,
-            ),
-            Text(
-              "We have sent a reset password to your email address",
-              style: TextStyle(color: Colors.grey.shade500, fontSize: 14),
-            ),
-            const SizedBox(
-              height: 300,
+              height: 250,
             ),
             ElevatedButton(
                 onPressed: () {

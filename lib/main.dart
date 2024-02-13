@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:jobsque/ForgotPassword/change_password.dart';
+import 'package:jobsque/ForgotPassword/email_sent.dart';
+import 'package:jobsque/ForgotPassword/password_changed.dart';
 import 'package:jobsque/HomeScreen/applied_home_screen.dart';
 import 'package:jobsque/Job%20Detail/bio_data.dart';
 import 'package:jobsque/Login/login_screen.dart';
@@ -21,6 +24,6 @@ class MyApp extends StatelessWidget {
               seedColor: const Color.fromARGB(1, 51, 102, 255)),
           useMaterial3: true,
         ),
-        home: const LoginScreen());
+        home: const PasswordChangedScreen());
   }
 }
