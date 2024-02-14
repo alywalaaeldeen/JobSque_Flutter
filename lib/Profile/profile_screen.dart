@@ -174,26 +174,40 @@ class ProfileScreen extends StatelessWidget {
                         "General",
                         style: TextStyle(color: Colors.grey.shade600),
                       )),
-                  const ProfileButtonItem(
+                  const GeneralButtonItem(
                     buttonName: "Edit Profile",
                     logoName: "editProfile",
                   ),
-                  const ProfileButtonItem(
+                  const GeneralButtonItem(
                     buttonName: "Portfolio",
                     logoName: "portfolio",
                   ),
-                  const ProfileButtonItem(
+                  const GeneralButtonItem(
                     buttonName: "Language",
                     logoName: "language",
                   ),
-                  const ProfileButtonItem(
+                  const GeneralButtonItem(
                     buttonName: "Notification",
                     logoName: "notifications",
                   ),
-                  const ProfileButtonItem(
+                  const GeneralButtonItem(
                     buttonName: "Login and Security",
                     logoName: "loginAndSecurity",
                   ),
+                  Container(
+                      padding: const EdgeInsets.all(8),
+                      alignment: Alignment.centerLeft,
+                      width: double.infinity,
+                      height: 35,
+                      color: Colors.grey.shade200,
+                      child: Text(
+                        "Others",
+                        style: TextStyle(color: Colors.grey.shade600),
+                      )),
+                  const OthersButtonItem(buttonName: "Accessiblity"),
+                  const OthersButtonItem(buttonName: "Help Center"),
+                  const OthersButtonItem(buttonName: "Terms and Conditions"),
+                  const OthersButtonItem(buttonName: "Privacy Policy"),
                 ],
               ),
             ])
@@ -204,9 +218,12 @@ class ProfileScreen extends StatelessWidget {
   }
 }
 
-class ProfileButtonItem extends StatelessWidget {
-  const ProfileButtonItem(
-      {super.key, required this.buttonName, required this.logoName});
+class GeneralButtonItem extends StatelessWidget {
+  const GeneralButtonItem({
+    super.key,
+    required this.buttonName,
+    required this.logoName,
+  });
   final String buttonName;
   final String logoName;
 
@@ -222,6 +239,21 @@ class ProfileButtonItem extends StatelessWidget {
           height: 40,
           child: SvgPicture.asset("assets/ButtonIcons/$logoName.svg"),
         ),
+        title: Text(buttonName),
+        trailing: const Icon(Icons.arrow_forward),
+      ),
+    );
+  }
+}
+
+class OthersButtonItem extends StatelessWidget {
+  const OthersButtonItem({super.key, required this.buttonName});
+  final String buttonName;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      child: ListTile(
         title: Text(buttonName),
         trailing: const Icon(Icons.arrow_forward),
       ),

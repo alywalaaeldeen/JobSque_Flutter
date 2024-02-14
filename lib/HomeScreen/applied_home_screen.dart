@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:jobsque/HomeScreen/home_screen.dart';
+import 'package:jobsque/HomeScreen/jobs_screen.dart';
 import 'package:jobsque/SearchScreens/search_screen.dart';
 
 class AppliedHomeScreen extends StatefulWidget {
