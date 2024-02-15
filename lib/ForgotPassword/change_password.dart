@@ -33,107 +33,115 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(10.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Text(
-              "Create new password",
-              style: TextStyle(fontSize: 28, fontWeight: FontWeight.w400),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            Text(
-              "Set your new password so you can login and access Jobsque",
-              style: TextStyle(fontSize: 16, color: Colors.grey.shade600),
-            ),
-            const SizedBox(
-              height: 25,
-            ),
-            Form(
-                child: Column(
-              children: [
-                TextFormField(
-                  obscureText: isObscure,
-                  keyboardType: TextInputType.visiblePassword,
-                  controller: passwordController,
-                  decoration: InputDecoration(
-                      suffixIcon: IconButton(
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text(
+                "Create new password",
+                style: TextStyle(fontSize: 28, fontWeight: FontWeight.w400),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Text(
+                "Set your new password so you can login and access Jobsque",
+                style: TextStyle(fontSize: 16, color: Colors.grey.shade600),
+              ),
+              const SizedBox(
+                height: 25,
+              ),
+              Form(
+                  key: _formKey,
+                  child: Column(
+                    children: [
+                      TextFormField(
+                        obscureText: isObscure,
+                        keyboardType: TextInputType.visiblePassword,
+                        controller: passwordController,
+                        decoration: InputDecoration(
+                            suffixIcon: IconButton(
+                                onPressed: () {
+                                  setState(() {
+                                    isObscure = !isObscure;
+                                  });
+                                },
+                                icon: (isObscure)
+                                    ? const Icon(Icons.visibility)
+                                    : const Icon(Icons.visibility_off)),
+                            prefixIcon: const Icon(Icons.lock),
+                            label: const Text("Password"),
+                            border: const OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(10)))),
+                        validator: (value) {
+                          if (value == null) {
+                            return "This field is required";
+                          } else if (value.length < 8) {
+                            return "Password must be at least 8 characters";
+                          }
+                          return null;
+                        },
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
+                      ),
+                      const SizedBox(
+                        height: 30,
+                      ),
+                      TextFormField(
+                        obscureText: isSecondObscure,
+                        keyboardType: TextInputType.visiblePassword,
+                        controller: confirmPasswordController,
+                        decoration: InputDecoration(
+                            suffixIcon: IconButton(
+                                onPressed: () {
+                                  setState(() {
+                                    isSecondObscure = !isSecondObscure;
+                                  });
+                                },
+                                icon: (isSecondObscure)
+                                    ? const Icon(Icons.visibility)
+                                    : const Icon(Icons.visibility_off)),
+                            prefixIcon: const Icon(Icons.lock),
+                            label: const Text("Confirm Password"),
+                            border: const OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(10)))),
+                        validator: (value) {
+                          if (value == null) {
+                            return "This field is required";
+                          } else if (passwordController.text !=
+                              confirmPasswordController.text) {
+                            return "Both passwords doesn't match.";
+                          }
+                          return null;
+                        },
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
+                      ),
+                      const SizedBox(
+                        height: 330,
+                      ),
+                      ElevatedButton(
                           onPressed: () {
-                            setState(() {
-                              isObscure = !isObscure;
-                            });
+                            if (_formKey.currentState!.validate()) {
+                              Navigator.of(context).pushAndRemoveUntil(
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const PasswordChangedScreen()),
+                                  (route) => false);
+                            }
+                            return;
                           },
-                          icon: (isObscure)
-                              ? const Icon(Icons.visibility)
-                              : const Icon(Icons.visibility_off)),
-                      prefixIcon: const Icon(Icons.lock),
-                      label: const Text("Password"),
-                      border: const OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(10)))),
-                  validator: (value) {
-                    if (value == null) {
-                      return "This field is required";
-                    } else if (value.length < 8) {
-                      return "Password must be at least 8 characters";
-                    }
-                    return null;
-                  },
-                  autovalidateMode: AutovalidateMode.onUserInteraction,
-                ),
-                const SizedBox(
-                  height: 30,
-                ),
-                TextFormField(
-                  obscureText: isSecondObscure,
-                  keyboardType: TextInputType.visiblePassword,
-                  controller: confirmPasswordController,
-                  decoration: InputDecoration(
-                      suffixIcon: IconButton(
-                          onPressed: () {
-                            setState(() {
-                              isSecondObscure = !isSecondObscure;
-                            });
-                          },
-                          icon: (isSecondObscure)
-                              ? const Icon(Icons.visibility)
-                              : const Icon(Icons.visibility_off)),
-                      prefixIcon: const Icon(Icons.lock),
-                      label: const Text("Confirm Password"),
-                      border: const OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(10)))),
-                  validator: (value) {
-                    if (value == null) {
-                      return "This field is required";
-                    } else if (passwordController.text !=
-                        confirmPasswordController.text) {
-                      return "Both passwords doesn't match.";
-                    }
-                    return null;
-                  },
-                  autovalidateMode: AutovalidateMode.onUserInteraction,
-                ),
-                const SizedBox(
-                  height: 350,
-                ),
-                ElevatedButton(
-                    onPressed: () {
-                      Navigator.of(context).pushAndRemoveUntil(
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  const PasswordChangedScreen()),
-                          (route) => false);
-                    },
-                    style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.blue,
-                        minimumSize: const Size(350, 50)),
-                    child: const Text(
-                      "Reset password",
-                      style: TextStyle(fontSize: 14, color: Colors.white),
-                    ))
-              ],
-            ))
-          ],
+                          style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.blue,
+                              minimumSize: const Size(350, 50)),
+                          child: const Text(
+                            "Reset password",
+                            style: TextStyle(fontSize: 14, color: Colors.white),
+                          ))
+                    ],
+                  ))
+            ],
+          ),
         ),
       ),
     );

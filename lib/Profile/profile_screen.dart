@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:jobsque/Login/login_screen.dart';
+import 'package:jobsque/Profile/edit_profile_screen.dart';
+import 'package:jobsque/Profile/language_screen.dart';
+import 'package:jobsque/Profile/login_and_security_screen.dart';
+import 'package:jobsque/Profile/notification_screen.dart';
+import 'package:jobsque/Profile/portfolio_screen.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -13,12 +19,18 @@ class ProfileScreen extends StatelessWidget {
         title: const Text(
           "Profile",
         ),
-        actions: const [
+        actions: [
           Padding(
-            padding: EdgeInsets.all(10.0),
-            child: Icon(
-              Icons.logout,
+            padding: const EdgeInsets.all(10.0),
+            child: IconButton(
+              icon: const Icon(Icons.logout),
               color: Colors.red,
+              onPressed: () {
+                Navigator.of(context).pushAndRemoveUntil(
+                    MaterialPageRoute(
+                        builder: (context) => const LoginScreen()),
+                    (route) => false);
+              },
             ),
           )
         ],
@@ -174,25 +186,46 @@ class ProfileScreen extends StatelessWidget {
                         "General",
                         style: TextStyle(color: Colors.grey.shade600),
                       )),
-                  const GeneralButtonItem(
+                  GeneralButtonItem(
                     buttonName: "Edit Profile",
                     logoName: "editProfile",
+                    onTap: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => const EditProfile()));
+                    },
                   ),
-                  const GeneralButtonItem(
+                  GeneralButtonItem(
                     buttonName: "Portfolio",
                     logoName: "portfolio",
+                    onTap: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => const PortfolioScreen()));
+                    },
                   ),
-                  const GeneralButtonItem(
+                  GeneralButtonItem(
                     buttonName: "Language",
                     logoName: "language",
+                    onTap: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => const LanguageScreen()));
+                    },
                   ),
-                  const GeneralButtonItem(
+                  GeneralButtonItem(
                     buttonName: "Notification",
                     logoName: "notifications",
+                    onTap: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => const NotificationScreen()));
+                    },
                   ),
-                  const GeneralButtonItem(
+                  GeneralButtonItem(
                     buttonName: "Login and Security",
                     logoName: "loginAndSecurity",
+                    onTap: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) =>
+                              const LoginAndSecurityScreen()));
+                    },
                   ),
                   Container(
                       padding: const EdgeInsets.all(8),
@@ -223,13 +256,16 @@ class GeneralButtonItem extends StatelessWidget {
     super.key,
     required this.buttonName,
     required this.logoName,
+    required this.onTap,
   });
   final String buttonName;
   final String logoName;
+  final void Function() onTap;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
+      onTap: onTap,
       child: ListTile(
         leading: Container(
           decoration: const BoxDecoration(

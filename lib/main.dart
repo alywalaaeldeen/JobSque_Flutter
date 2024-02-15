@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:jobsque/ForgotPassword/password_changed.dart';
+import 'package:jobsque/Applied/applied_screen.dart';
 import 'package:jobsque/HomeScreen/home_screen.dart';
-import 'package:jobsque/Profile/profile_screen.dart';
+import 'package:jobsque/Job%20Detail/bio_data.dart';
+import 'package:jobsque/Job%20Detail/job_detail.dart';
+import 'package:jobsque/SplashScreen/splash_screen.dart';
+
+import 'package:jobsque/onboarding_screens.dart/onboarding_screen.dart';
 
 void main() {
   runApp(const MyApp());

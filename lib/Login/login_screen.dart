@@ -4,6 +4,11 @@ import 'package:jobsque/ForgotPassword/reset_password.dart';
 import 'package:jobsque/HomeScreen/home_screen.dart';
 import 'package:jobsque/Regsitration/create_account.dart';
 
+final TextEditingController userNameController = TextEditingController();
+final TextEditingController passwordController = TextEditingController();
+const String username = "Aly";
+const String password = "Aly12345";
+
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
@@ -13,8 +18,7 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final TextEditingController userNameController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
+
   bool isObscure = false;
   bool rememberMe = false;
   @override
@@ -61,6 +65,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return "This field is requiered";
+                        } else if (value != username) {
+                          return "Wrong Username";
                         }
                         return null;
                       },
@@ -92,6 +98,8 @@ class _LoginScreenState extends State<LoginScreen> {
                           return "This field is required";
                         } else if (value.length < 8) {
                           return "Password must be at least 8 characters";
+                        } else if (value != password) {
+                          return "Wrong Password";
                         }
                         return null;
                       },
@@ -165,7 +173,10 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     ElevatedButton(
                         onPressed: () {
-                          if (_formKey.currentState!.validate()) {
+                          if (!_formKey.currentState!.validate()) {
+                            return;
+                          } else if (userNameController.text == username &&
+                              passwordController.text == password) {
                             Navigator.pushAndRemoveUntil(
                                 context,
                                 MaterialPageRoute(
