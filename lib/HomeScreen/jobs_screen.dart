@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:jobsque/Job%20Detail/job_detail.dart';
 import 'package:jobsque/SearchScreens/search_screen.dart';
 
 class JobsScreen extends StatefulWidget {
@@ -298,7 +299,10 @@ class _SuggestedJobItemState extends State<SuggestedJobItem> {
                 ], style: TextStyle(color: Colors.white, fontSize: 22)),
               ),
               ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: ((context) => const JobDetail())));
+                  },
                   style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.blue,
                       foregroundColor: Colors.white),

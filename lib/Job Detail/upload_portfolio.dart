@@ -1,8 +1,42 @@
+import 'dart:io';
+
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:jobsque/Job%20Detail/successfull_screen.dart';
 
-class UploadPortfolioScreen extends StatelessWidget {
+class UploadPortfolioScreen extends StatefulWidget {
   const UploadPortfolioScreen({super.key});
+
+  @override
+  State<UploadPortfolioScreen> createState() => _UploadPortfolioScreenState();
+}
+
+class _UploadPortfolioScreenState extends State<UploadPortfolioScreen> {
+  FilePickerResult? result;
+  String? fileName;
+  PlatformFile? pickedFile;
+  File? fileToDisplay;
+  int? fileCapacity;
+  void pickFile() async {
+    try {
+      result = await FilePicker.platform.pickFiles(
+        type: FileType.any,
+        allowMultiple: false,
+      );
+      if (result != null) {
+        fileName = result!.files.first.name;
+        pickedFile = result!.files.first;
+        fileToDisplay = File(pickedFile!.path.toString());
+        fileCapacity = result!.files.first.size;
+        //sfileCapacity = fileCapacity! ~/ 1000;
+        print("File Name = $fileName");
+        setState(() {});
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -117,9 +151,93 @@ class UploadPortfolioScreen extends StatelessWidget {
           const SizedBox(
             height: 20,
           ),
-          /*
-           Upload File Field,
-          */
+          const Text(
+            "Upload CV",
+            style: TextStyle(fontSize: 16),
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          (pickedFile != null)
+              ? Container(
+                  alignment: Alignment.centerLeft,
+                  width: 340,
+                  height: 80,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15),
+                      border: Border.all(color: Colors.grey.shade300)),
+                  child: ListTile(
+                    leading: SvgPicture.asset("assets/icons/pdfLogo.svg"),
+                    title: Text(
+                      pickedFile!.name.toString(),
+                      style: const TextStyle(fontSize: 12),
+                    ),
+                    subtitle: Text(
+                      "$fileCapacity KB",
+                      style: const TextStyle(fontSize: 12),
+                    ),
+                    trailing: IconButton(
+                        onPressed: () {},
+                        icon: Icon(
+                          Icons.cancel,
+                          color: Colors.red.shade700,
+                        )),
+                  ),
+                )
+              : Container(
+                  alignment: Alignment.centerLeft,
+                  width: 340,
+                  height: 80,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15),
+                      border: Border.all(color: Colors.grey.shade300)),
+                  child: ListTile(
+                    leading: SvgPicture.asset("assets/icons/pdfLogo.svg"),
+                  ),
+                ),
+          const SizedBox(
+            height: 15,
+          ),
+          Container(
+            width: 350,
+            height: 280,
+            decoration: BoxDecoration(
+                border: Border.all(color: Colors.blue),
+                borderRadius: BorderRadius.circular(20),
+                color: Colors.blue.shade100),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SizedBox(
+                    width: 60,
+                    height: 60,
+                    child:
+                        SvgPicture.asset("assets/icons/document-upload.svg")),
+                const SizedBox(
+                  height: 10,
+                ),
+                const Text(
+                  "Upload your other file",
+                  style: TextStyle(fontSize: 16),
+                ),
+                const SizedBox(
+                  height: 30,
+                ),
+                ElevatedButton(
+                    onPressed: () {
+                      pickFile();
+                    },
+                    style: ElevatedButton.styleFrom(
+                        minimumSize: const Size(300, 50),
+                        backgroundColor: Colors.blue.shade200),
+                    child: const Text(
+                      "Add File",
+                      style: TextStyle(color: Colors.white),
+                    )),
+              ],
+            ),
+          ),
           const SizedBox(
             height: 50,
           ),

@@ -164,9 +164,9 @@ class _TypeOfWorkItemState extends State<TypeOfWorkItem> {
             border: Border.all(color: Colors.grey.shade600),
             borderRadius: const BorderRadius.all(Radius.circular(15))),
         child: ListTile(
-          title: const Text(
-            "Senior UX Designer",
-            style: TextStyle(fontSize: 16),
+          title: Text(
+            widget.workType,
+            style: const TextStyle(fontSize: 16),
           ),
           subtitle: Text(
             "CV.pdf Portfolio.pdf",
@@ -179,7 +179,10 @@ class _TypeOfWorkItemState extends State<TypeOfWorkItem> {
                 });
               },
               icon: (isChecked)
-                  ? const Icon(Icons.radio_button_checked , color: Colors.blue,)
+                  ? const Icon(
+                      Icons.radio_button_checked,
+                      color: Colors.blue,
+                    )
                   : const Icon(Icons.radio_button_off_rounded)),
         ),
       ),

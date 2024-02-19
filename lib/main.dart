@@ -3,6 +3,7 @@ import 'package:jobsque/Applied/applied_screen.dart';
 import 'package:jobsque/HomeScreen/home_screen.dart';
 import 'package:jobsque/Job%20Detail/bio_data.dart';
 import 'package:jobsque/Job%20Detail/job_detail.dart';
+import 'package:jobsque/Job%20Detail/upload_portfolio.dart';
 import 'package:jobsque/SplashScreen/splash_screen.dart';
 
 import 'package:jobsque/onboarding_screens.dart/onboarding_screen.dart';
@@ -25,6 +26,6 @@ class MyApp extends StatelessWidget {
               seedColor: const Color.fromARGB(1, 51, 102, 255)),
           useMaterial3: true,
         ),
-        home: const HomeScreen());
+        home: const JobDetail());
   }
 }
