@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:jobsque/Job%20Detail/bio_data.dart';
+import 'package:jobsque/screens/Job%20Detail/bio_data.dart';
 
 class JobDetail extends StatefulWidget {
   const JobDetail({super.key});

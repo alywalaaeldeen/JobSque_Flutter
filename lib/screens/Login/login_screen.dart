@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:jobsque/ForgotPassword/reset_password.dart';
-import 'package:jobsque/HomeScreen/home_screen.dart';
-import 'package:jobsque/Regsitration/create_account.dart';
+import 'package:jobsque/screens/ForgotPassword/reset_password.dart';
+import 'package:jobsque/screens/HomeScreen/home_screen.dart';
+import 'package:jobsque/screens/Regsitration/create_account.dart';
 
 final TextEditingController userNameController = TextEditingController();
 final TextEditingController passwordController = TextEditingController();

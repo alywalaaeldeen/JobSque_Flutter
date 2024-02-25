@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:jobsque/Login/login_screen.dart';
-import 'package:jobsque/Regsitration/work_type_screen.dart';
+import 'package:jobsque/screens/Login/login_screen.dart';
+import 'package:jobsque/screens/Regsitration/work_type_screen.dart';
 
 class CreateAccount extends StatefulWidget {
   const CreateAccount({super.key});

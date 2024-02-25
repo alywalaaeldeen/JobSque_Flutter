@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:jobsque/Job%20Detail/job_detail.dart';
-import 'package:jobsque/SearchScreens/search_screen.dart';
+import 'package:jobsque/screens/Job%20Detail/job_detail.dart';
+import 'package:jobsque/screens/SearchScreens/search_screen.dart';
 
 class JobsScreen extends StatefulWidget {
   const JobsScreen({super.key});

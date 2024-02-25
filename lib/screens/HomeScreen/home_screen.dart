@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:jobsque/Applied/applied_screen.dart';
-import 'package:jobsque/HomeScreen/jobs_screen.dart';
-import 'package:jobsque/Profile/profile_screen.dart';
-import 'package:jobsque/Saved/saved_screen.dart';
-import 'package:jobsque/messages/messages_screen.dart';
+import 'package:jobsque/screens/Applied/applied_screen.dart';
+import 'package:jobsque/screens/HomeScreen/jobs_screen.dart';
+import 'package:jobsque/screens/Profile/profile_screen.dart';
+import 'package:jobsque/screens/Saved/saved_screen.dart';
+import 'package:jobsque/screens/messages/messages_screen.dart';
 
 var screens = [
   const JobsScreen(),

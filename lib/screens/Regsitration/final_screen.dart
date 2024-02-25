@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:jobsque/HomeScreen/home_screen.dart';
+import 'package:jobsque/screens/HomeScreen/home_screen.dart';
 
 class FinalScreen extends StatelessWidget {
   const FinalScreen({super.key});

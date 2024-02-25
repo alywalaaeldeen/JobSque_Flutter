@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:jobsque/Regsitration/work_location_screen.dart';
+import 'package:jobsque/screens/Regsitration/work_location_screen.dart';
 
 class WorkType extends StatefulWidget {
   const WorkType({super.key});

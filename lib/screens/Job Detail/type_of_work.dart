@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:jobsque/Job%20Detail/upload_portfolio.dart';
+import 'package:jobsque/screens/Job%20Detail/upload_portfolio.dart';
 
 class TypeOfWork extends StatelessWidget {
   const TypeOfWork({super.key});

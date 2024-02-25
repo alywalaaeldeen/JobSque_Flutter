@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:jobsque/Login/login_screen.dart';
-import 'package:jobsque/Profile/edit_profile_screen.dart';
-import 'package:jobsque/Profile/language_screen.dart';
-import 'package:jobsque/Profile/login_and_security_screen.dart';
-import 'package:jobsque/Profile/notification_screen.dart';
-import 'package:jobsque/Profile/portfolio_screen.dart';
+import 'package:jobsque/screens/Login/login_screen.dart';
+import 'package:jobsque/screens/Profile/edit_profile_screen.dart';
+import 'package:jobsque/screens/Profile/language_screen.dart';
+import 'package:jobsque/screens/Profile/login_and_security_screen.dart';
+import 'package:jobsque/screens/Profile/notification_screen.dart';
+import 'package:jobsque/screens/Profile/portfolio_screen.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});

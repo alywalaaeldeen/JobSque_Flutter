@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
-import 'package:jobsque/Job%20Detail/type_of_work.dart';
+import 'package:jobsque/screens/Job%20Detail/type_of_work.dart';
 
 class BioDataScreen extends StatelessWidget {
   BioDataScreen({super.key});

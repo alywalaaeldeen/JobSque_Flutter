@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:jobsque/Regsitration/final_screen.dart';
+import 'package:jobsque/screens/Regsitration/final_screen.dart';
 
 class WorkLocationScreen extends StatelessWidget {
   const WorkLocationScreen({super.key});

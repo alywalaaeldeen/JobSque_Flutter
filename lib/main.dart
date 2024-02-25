@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:jobsque/Applied/applied_screen.dart';
-import 'package:jobsque/HomeScreen/home_screen.dart';
-import 'package:jobsque/Job%20Detail/bio_data.dart';
-import 'package:jobsque/Job%20Detail/job_detail.dart';
-import 'package:jobsque/Job%20Detail/upload_portfolio.dart';
-import 'package:jobsque/SplashScreen/splash_screen.dart';
+import 'package:jobsque/screens/Applied/applied_screen.dart';
+import 'package:jobsque/screens/HomeScreen/home_screen.dart';
+import 'package:jobsque/screens/Job%20Detail/bio_data.dart';
+import 'package:jobsque/screens/Job%20Detail/job_detail.dart';
+import 'package:jobsque/screens/Job%20Detail/upload_portfolio.dart';
+import 'package:jobsque/screens/SplashScreen/splash_screen.dart';
 
-import 'package:jobsque/onboarding_screens.dart/onboarding_screen.dart';
+import 'package:jobsque/screens/onboarding_screens.dart/onboarding_screen.dart';
 
 void main() {
   runApp(const MyApp());

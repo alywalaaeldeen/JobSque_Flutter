@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:jobsque/ForgotPassword/email_sent.dart';
-import 'package:jobsque/Login/login_screen.dart';
+import 'package:jobsque/screens/ForgotPassword/email_sent.dart';
+import 'package:jobsque/screens/Login/login_screen.dart';
 
 class ResetPasswordScreen extends StatelessWidget {
   ResetPasswordScreen({super.key});

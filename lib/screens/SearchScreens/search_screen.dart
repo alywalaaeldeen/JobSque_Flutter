@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:jobsque/SearchScreens/empty_state.dart';
-import 'package:jobsque/SearchScreens/result_screen.dart';
-import 'package:jobsque/SearchScreens/searching_screen.dart';
+import 'package:jobsque/screens/SearchScreens/empty_state.dart';
+import 'package:jobsque/screens/SearchScreens/result_screen.dart';
+import 'package:jobsque/screens/SearchScreens/searching_screen.dart';
 
 var jobs = ["UI/UX Designer"];
 
