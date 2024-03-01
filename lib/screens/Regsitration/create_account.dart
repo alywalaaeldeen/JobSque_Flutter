@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:jobsque/providers/auth_provider.dart';
 import 'package:jobsque/screens/Login/login_screen.dart';
 import 'package:jobsque/screens/Regsitration/work_type_screen.dart';
+
+final TextEditingController nameController = TextEditingController();
+final TextEditingController emailController = TextEditingController();
+final TextEditingController passController = TextEditingController();
+final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
 class CreateAccount extends StatefulWidget {
   const CreateAccount({super.key});
@@ -11,12 +17,6 @@ class CreateAccount extends StatefulWidget {
 }
 
 class _CreateAccountState extends State<CreateAccount> {
-  final TextEditingController userNameController = TextEditingController();
-
-  final TextEditingController emailController = TextEditingController();
-
-  final TextEditingController passwordController = TextEditingController();
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   bool isObscure = true;
 
   // final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
@@ -60,7 +60,7 @@ class _CreateAccountState extends State<CreateAccount> {
                       children: [
                         TextFormField(
                           keyboardType: TextInputType.name,
-                          controller: userNameController,
+                          controller: nameController,
                           decoration: const InputDecoration(
                               prefixIcon: Icon(Icons.person_3_sharp),
                               label: Text("User Name"),
@@ -99,7 +99,7 @@ class _CreateAccountState extends State<CreateAccount> {
                         TextFormField(
                           obscureText: isObscure,
                           keyboardType: TextInputType.visiblePassword,
-                          controller: passwordController,
+                          controller: passController,
                           decoration: InputDecoration(
                               suffixIcon: IconButton(
                                   onPressed: () {
@@ -118,9 +118,9 @@ class _CreateAccountState extends State<CreateAccount> {
                           validator: (value) {
                             if (value == null) {
                               return "This field is required";
-                            } else if (value.length < 8) {
+                            } /*else if (value.length < 8) {
                               return "Password must be at least 8 characters";
-                            }
+                            }*/
                             return null;
                           },
                           autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -156,15 +156,7 @@ class _CreateAccountState extends State<CreateAccount> {
                         ),
                         ElevatedButton(
                           onPressed: () {
-                            if (_formKey.currentState!.validate()) {
-                              Navigator.of(context).pushAndRemoveUntil(
-                                  MaterialPageRoute(
-                                    builder: ((context) => const WorkType()),
-                                  ),
-                                  (route) => false);
-                            } else {
-                              return;
-                            }
+                            AuthProvider().register(context);
                           },
                           style: ElevatedButton.styleFrom(
                               minimumSize: const Size(327, 48),

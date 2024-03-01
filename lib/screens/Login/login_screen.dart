@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:jobsque/screens/ForgotPassword/reset_password.dart';
+import 'package:jobsque/providers/auth_provider.dart';
 import 'package:jobsque/screens/HomeScreen/home_screen.dart';
 import 'package:jobsque/screens/Regsitration/create_account.dart';
 
-final TextEditingController userNameController = TextEditingController();
+final TextEditingController emailAddressController = TextEditingController();
 final TextEditingController passwordController = TextEditingController();
-const String username = "Aly";
-const String password = "Aly12345";
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -54,19 +54,17 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: Column(
                   children: [
                     TextFormField(
-                      keyboardType: TextInputType.name,
-                      controller: userNameController,
+                      keyboardType: TextInputType.emailAddress,
+                      controller: emailAddressController,
                       decoration: const InputDecoration(
                           prefixIcon: Icon(Icons.person_3_sharp),
-                          label: Text("User Name"),
+                          label: Text("Email"),
                           border: OutlineInputBorder(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(10)))),
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return "This field is requiered";
-                        } else if (value != username) {
-                          return "Wrong Username";
                         }
                         return null;
                       },
@@ -96,10 +94,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       validator: (value) {
                         if (value == null) {
                           return "This field is required";
-                        } else if (value.length < 8) {
+                        } else if (value.length < 7) {
                           return "Password must be at least 8 characters";
-                        } else if (value != password) {
-                          return "Wrong Password";
                         }
                         return null;
                       },
@@ -173,17 +169,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     ElevatedButton(
                         onPressed: () {
-                          if (!_formKey.currentState!.validate()) {
-                            return;
-                          } else if (userNameController.text == username &&
-                              passwordController.text == password) {
-                            Navigator.pushAndRemoveUntil(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => const HomeScreen()),
-                                (route) => false);
-                          } else {
-                            return;
+                          if (_formKey.currentState!.validate()) {
+                            AuthProvider().login(context);
                           }
                         },
                         style: ElevatedButton.styleFrom(
@@ -278,4 +265,6 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
     );
   }
+
+ 
 }
