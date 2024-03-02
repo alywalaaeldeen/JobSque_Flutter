@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:jobsque/Models/suggested_job.dart';
+import 'package:jobsque/providers/jobs_provider.dart';
 import 'package:jobsque/screens/Job%20Detail/job_detail.dart';
 import 'package:jobsque/screens/SearchScreens/search_screen.dart';
 
