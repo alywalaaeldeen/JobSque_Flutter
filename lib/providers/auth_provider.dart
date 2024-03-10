@@ -25,6 +25,7 @@ class AuthProvider extends ChangeNotifier {
       Navigator.of(buildContext).pushAndRemoveUntil(
           MaterialPageRoute(builder: (buildContext) => const HomeScreen()),
           (route) => false);
+      LocalDatabase.setId(response.data['user']["id"]);
       LocalDatabase.setToken(response.data["token"]);
     } else if (response.data["status"] == false) {
       String message = "";

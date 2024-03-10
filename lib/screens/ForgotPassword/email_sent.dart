@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:jobsque/screens/ForgotPassword/change_password.dart';
-import 'package:jobsque/screens/HomeScreen/home_screen.dart';
 
 class EmailSentScreen extends StatelessWidget {
   const EmailSentScreen({super.key});

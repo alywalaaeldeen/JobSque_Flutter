@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:jobsque/providers/auth_provider.dart';
 import 'package:jobsque/screens/Login/login_screen.dart';
-import 'package:jobsque/screens/Regsitration/work_type_screen.dart';
 
 final TextEditingController nameController = TextEditingController();
 final TextEditingController emailController = TextEditingController();

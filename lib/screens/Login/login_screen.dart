@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:jobsque/screens/ForgotPassword/reset_password.dart';
 import 'package:jobsque/providers/auth_provider.dart';
-import 'package:jobsque/screens/HomeScreen/home_screen.dart';
 import 'package:jobsque/screens/Regsitration/create_account.dart';
 
 final TextEditingController emailAddressController = TextEditingController();
@@ -94,7 +92,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       validator: (value) {
                         if (value == null) {
                           return "This field is required";
-                        } else if (value.length < 7) {
+                        } else if (value.length < 6) {
                           return "Password must be at least 8 characters";
                         }
                         return null;
@@ -265,6 +263,4 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
     );
   }
-
- 
 }

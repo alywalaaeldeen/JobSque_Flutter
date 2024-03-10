@@ -3,7 +3,7 @@ import 'package:jobsque/screens/SearchScreens/empty_state.dart';
 import 'package:jobsque/screens/SearchScreens/result_screen.dart';
 import 'package:jobsque/screens/SearchScreens/searching_screen.dart';
 
-var jobs = ["UI/UX Designer"];
+var jobSearch = ["UI/UX Designer"];
 
 class SearchScreen extends StatelessWidget {
   const SearchScreen(
@@ -33,7 +33,7 @@ class SearchScreen extends StatelessWidget {
                 onFieldSubmitted: (value) {
                   // initiate a connection with API to retrieve all jobs with the provided value.
                   if (formKey.currentState!.validate()) {
-                    if (jobs.contains(searchController.text)) {
+                    if (jobSearch.contains(searchController.text)) {
                       Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) => const SearchScreen(
                                 isSearched: true,

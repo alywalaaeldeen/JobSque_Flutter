@@ -1,11 +1,12 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:jobsque/Models/jobs.dart';
 import 'package:jobsque/screens/Job%20Detail/bio_data.dart';
 
 class JobDetail extends StatefulWidget {
-  const JobDetail({super.key});
+  final JobData? job;
+  const JobDetail({super.key, required this.job});
 
   @override
   State<JobDetail> createState() => _JobDetailState();
@@ -36,26 +37,25 @@ class _JobDetailState extends State<JobDetail> {
                   decoration: BoxDecoration(
                     borderRadius: const BorderRadius.all(Radius.circular(10)),
                   ),
-                  child: SvgPicture.asset("assets/images/TwitterLogo.svg")),
+                  child: Image.network(widget.job?.image ?? "")),
               const SizedBox(
                 height: 10,
               ),
-              const Text(
-                "Senior UI Designer",
+              Text(
+                widget.job?.jobType ?? "",
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.w400),
               ),
               Text(
-                "Twitter • Jakarta, Indonesia",
+                widget.job?.compName ?? "",
                 style: TextStyle(fontSize: 12, color: Colors.grey.shade800),
               ),
               const SizedBox(
                 height: 15,
               ),
-              const Row(
+              Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  CategoryItem(text: "Fulltime"),
-                  CategoryItem(text: "Onsite"),
+                  CategoryItem(text: widget.job?.jobTimeType ?? ""),
                   CategoryItem(text: "Senior")
                 ],
               ),
@@ -175,7 +175,7 @@ class _JobDetailState extends State<JobDetail> {
                                 height: 10,
                               ),
                               Text(
-                                "Your role as the UI Designer is to use interactive components on various platforms (web, desktop and mobile). This will include producing high-fidelity mock-ups, iconography, UI illustrations/graphics, and other graphic elements. As the UI Designer, you will be supporting the wider design team with the internal Design System, tying together the visual language. You will with other UI and UX Designers, Product Managers, and Engineering teams in a highly customer-focused agile environment to help define the vision of the products.",
+                                widget.job?.jobDescription ?? "",
                                 style: TextStyle(
                                     fontSize: 12, color: Colors.grey.shade600),
                               ),
@@ -191,14 +191,7 @@ class _JobDetailState extends State<JobDetail> {
                                 height: 10,
                               ),
                               Text(
-                                '''A strong visual portfolio with clear understanding of UI methodologies
-Ability to create hi-fidelity mock-ups in Figma
-Ability to create various graphics for the web e.g. illustrations and icons
-Able to facilitate workshops and liaise with stakeholders
-Proficiency in the Adobe Creative Suite
-Confident communicator with an analytical mindset
-Design library/Design system experience
-4+ years of commercial experience in UI/Visual Design''',
+                                widget.job?.jobSkill ?? " ",
                                 style: TextStyle(
                                     fontSize: 12, color: Colors.grey.shade600),
                               ),
@@ -248,7 +241,7 @@ Design library/Design system experience
                                         padding: EdgeInsets.all(5),
                                         alignment: Alignment.topLeft,
                                         width: 160,
-                                        height: 60,
+                                        height: 80,
                                         decoration: BoxDecoration(
                                             border:
                                                 Border.all(color: Colors.black),
@@ -268,7 +261,7 @@ Design library/Design system experience
                                               height: 5,
                                             ),
                                             Text(
-                                              "twitter@mail.com",
+                                              widget.job?.compEmail ?? "",
                                               style: TextStyle(fontSize: 14),
                                             )
                                           ],
@@ -281,7 +274,7 @@ Design library/Design system experience
                                         padding: EdgeInsets.all(5),
                                         alignment: Alignment.topLeft,
                                         width: 160,
-                                        height: 60,
+                                        height: 80,
                                         decoration: BoxDecoration(
                                             border:
                                                 Border.all(color: Colors.black),
@@ -301,7 +294,7 @@ Design library/Design system experience
                                               height: 5,
                                             ),
                                             Text(
-                                              "https://twitter.com",
+                                              widget.job?.compWebsite ?? "",
                                               style: TextStyle(fontSize: 14),
                                             )
                                           ],
@@ -319,7 +312,7 @@ Design library/Design system experience
                                         fontWeight: FontWeight.w500),
                                   ),
                                   Text(
-                                    "Understanding Recruitment is an award-winning technology, software and digital recruitment consultancy with headquarters in St. Albans, Hertfordshire.We also have a US office in Boston, Massachusetts specialising in working closely with highly skilled individuals seeking their next career move within Next Gen Tech, Backend Engineering, and Artificial Intelligence.We recently celebrated our first decade in business and over the years have been recognised with several industry awards including 'Best Staffing Firm to Work For 2018'​ at the SIA Awards for the third consecutive year and ‘Business of the Year 2017’ at the SME Hertfordshire Business Awards.Our teams of specialists operate across all areas of Technology and Digital, including Java, JavaScript, Python, .Net, DevOps & SRE, SDET, Artificial Intelligence, Machine Learning, AI, Digital, Quantum Computing, Hardware Acceleration, Digital, Charity, Fintech, and the Public Sector.",
+                                    widget.job?.aboutComp ?? "",
                                     style: TextStyle(
                                         fontSize: 12,
                                         color: Colors.grey.shade600),

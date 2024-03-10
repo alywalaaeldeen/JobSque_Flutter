@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:jobsque/screens/HomeScreen/home_screen.dart';
-import 'package:jobsque/screens/HomeScreen/jobs_screen.dart';
 import 'package:jobsque/screens/SearchScreens/search_screen.dart';
 
 class AppliedHomeScreen extends StatefulWidget {
@@ -168,14 +166,9 @@ class _AppliedHomeScreenState extends State<AppliedHomeScreen> {
                   SizedBox(
                     height: 180,
                     child: PageView(children: const [
-                      SuggestedJobItem(
-                          companyLogo: "assets/images/zoom.svg",
-                          jobName: "Product Designer",
-                          companyAndLocation: "Zoom - USA"),
-                      SuggestedJobItem(
-                          companyLogo: "assets/images/google.svg",
-                          jobName: "Software Developer ",
-                          companyAndLocation: "Google - USA")
+                      /*SuggestedJobItem(
+                        suggestedJob: sj,
+                      )*/
                     ]),
                   ),
                   const SizedBox(
@@ -196,10 +189,10 @@ class _AppliedHomeScreenState extends State<AppliedHomeScreen> {
                   const SizedBox(
                     height: 10,
                   ),
-                  const RecentJobItem(
+                  /* const RecentJobItem(
                       jobName: "Senior UI Designer",
                       companyLogo: "assets/images/TwitterLogo.svg",
-                      companyAndLocation: "Twitter • Jakarta, Indonesia "),
+                      companyAndLocation: "Twitter • Jakarta, Indonesia "),*/
                 ]),
               ),
             ),

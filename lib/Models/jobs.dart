@@ -1,11 +1,11 @@
-class SuggestedJob {
-  final bool status;
+class Job {
+  final bool? status;
   final JobData data;
 
-  SuggestedJob({required this.status, required this.data});
+  Job({required this.status, required this.data});
 
-  factory SuggestedJob.fromJson(Map<String, dynamic> json) => SuggestedJob(
-        status: json['status'] as bool,
+  factory Job.fromJson(Map<String, dynamic> json) => Job(
+        status: json['status'],
         data: JobData.fromJson(json['data'] as Map<String, dynamic>),
       );
 }
@@ -62,7 +62,7 @@ class JobData {
         jobSkill: json['job_skill'] as String,
         compName: json['comp_name'] as String,
         compEmail: json['comp_email'] as String,
-        compWebsite: json['comp_website']  as String,
+        compWebsite: json['comp_website'] as String,
         aboutComp: json['about_comp'] as String,
         location: json['location'] as String,
         salary: json['salary'] as String,

@@ -6,7 +6,7 @@ import 'package:jobsque/screens/Saved/saved_screen.dart';
 import 'package:jobsque/screens/messages/messages_screen.dart';
 
 var screens = [
-  const JobsScreen(),
+  JobsScreen(),
   const MessagesScreen(),
   const AppliedScreen(),
   const SavedScreen(),
