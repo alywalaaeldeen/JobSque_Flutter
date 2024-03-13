@@ -26,8 +26,9 @@ class EditProfile extends StatelessWidget {
                     Container(
                       width: 90,
                       height: 90,
-                      decoration: const BoxDecoration(
-                          color: Colors.grey, shape: BoxShape.circle),
+                      decoration: const BoxDecoration(shape: BoxShape.circle),
+                      child:
+                          Image.asset("assets/peopleIcons/profilePicture2.png"),
                     ),
                     const SizedBox(
                       height: 5,

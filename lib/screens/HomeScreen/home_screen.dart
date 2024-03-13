@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:jobsque/providers/jobs_provider.dart';
 import 'package:jobsque/screens/Applied/applied_screen.dart';
 import 'package:jobsque/screens/HomeScreen/jobs_screen.dart';
 import 'package:jobsque/screens/Profile/profile_screen.dart';
@@ -9,9 +11,11 @@ var screens = [
   JobsScreen(),
   const MessagesScreen(),
   const AppliedScreen(),
-  const SavedScreen(),
-  const ProfileScreen()
+  SavedScreen(),
+  ProfileScreen()
 ];
+final jobNotifier =
+    ChangeNotifierProvider<JobsProvider>((ref) => JobsProvider());
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});

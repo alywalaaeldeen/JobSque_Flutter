@@ -14,6 +14,7 @@ class JobDetail extends StatefulWidget {
 
 class _JobDetailState extends State<JobDetail> {
   int index = 0;
+  bool isFavorite = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,7 +23,23 @@ class _JobDetailState extends State<JobDetail> {
         title: const Text("Job Detail"),
         actions: [
           IconButton(
-              onPressed: () {}, icon: const Icon(Icons.turned_in_not_rounded))
+            onPressed: () {
+              setState(() {
+                isFavorite = !isFavorite;
+              });
+            },
+            icon: (!isFavorite)
+                ? const Icon(
+                    Icons.turned_in_not_rounded,
+                    color: Colors.black,
+                    size: 30,
+                  )
+                : const Icon(
+                    Icons.turned_in_rounded,
+                    color: Colors.black,
+                    size: 30,
+                  ),
+          )
         ],
       ),
       body: Padding(

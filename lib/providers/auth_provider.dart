@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jobsque/Database/local_database.dart';
+import 'package:jobsque/Models/users.dart';
 import 'package:jobsque/screens/HomeScreen/home_screen.dart';
 import 'package:jobsque/screens/Regsitration/create_account.dart';
 import 'package:jobsque/screens/Login/login_screen.dart';
@@ -73,5 +74,34 @@ class AuthProvider extends ChangeNotifier {
       );
       notifyListeners();
     }
+  }
+
+  Future<Data?> getProfile() async {
+    final token = await LocalDatabase.getToken();
+    final dio = Dio();
+    final response =
+        await dio.get("https://project2.amit-learning.com/api/auth/profile",
+            options: Options(headers: {
+              "Authorization": "Bearer $token",
+              "Accept": "application/json",
+              "Connection": "keep-alive"
+            }));
+
+    if (response.data['status']) {
+      final user = Data.fromJson(response.data);
+
+      return user;
+    }
+    return null;
+  }
+
+  @override
+  Future<void> dispose() async {
+    super.dispose();
+    emailAddressController.text = "";
+    passwordController.text = "";
+
+    LocalDatabase.setId(0);
+    LocalDatabase.setToken("0");
   }
 }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:jobsque/screens/HomeScreen/suggested_jobs_screen.dart';
+import 'package:jobsque/screens/SplashScreen/splash_screen.dart';
 
 void main() {
   runApp(
@@ -22,6 +22,6 @@ class MyApp extends StatelessWidget {
               seedColor: const Color.fromARGB(1, 51, 102, 255)),
           useMaterial3: true,
         ),
-        home: SuggestedJobsScreen());
+        home: const SplashScreen());
   }
 }

@@ -22,22 +22,27 @@ class RecentJobsScreen extends StatelessWidget {
       ),
       body: Column(
         children: [
-          Consumer(builder: (context, ref, _) {
-            final jobChange = ref.watch(jobNotifier);
-
-            Future.delayed(Duration.zero, () async {
-              jobs = await jobChange.getAllJobs();
-            });
-            return Expanded(
-              child: ListView.builder(
-                  itemCount: jobs.length,
-                  itemBuilder: (context, index) {
-                    return RecentJobItem(
-                      recentJob: jobs[index],
-                    );
-                  }),
-            );
-          }),
+          Expanded(
+            child: Consumer(builder: (context, ref, _) {
+              final jobChange = ref.watch(jobNotifier);
+              Future.delayed(Duration.zero, () async {
+                jobs = await jobChange.getAllJobs();
+              });
+              if (jobs.isEmpty) {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              } else {
+                return ListView.builder(
+                    itemCount: jobs.length,
+                    itemBuilder: (context, index) {
+                      return RecentJobItem(
+                        recentJob: jobs[index],
+                      );
+                    });
+              }
+            }),
+          ),
         ],
       ),
     );

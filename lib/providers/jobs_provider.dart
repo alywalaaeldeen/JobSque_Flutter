@@ -48,4 +48,38 @@ class JobsProvider extends ChangeNotifier {
     }
     return [];
   }
+
+  Future<void> addToFavorites(int jobId) async {
+    String token = await LocalDatabase.getToken() as String;
+
+    final dio = Dio();
+
+    await dio.post("https://project2.amit-learning.com/api/favorites",
+        data: {"job_id": jobId},
+        options: Options(headers: {
+          "Authorization": "Bearer $token",
+          "Accept": "application/json",
+          "Connection": "keep-alive"
+        }));
+  }
+
+  Future<List<JobData>> getAllFavorites() async {
+    List<JobData> favorites = [];
+    String token = await LocalDatabase.getToken() as String;
+    final dio = Dio();
+    final response =
+        await dio.get("https://project2.amit-learning.com/api/favorites",
+            options: Options(headers: {
+              "Authorization": "Bearer $token",
+              "Accept": "application/json",
+              "Connection": "keep-alive"
+            }));
+    if (response.data["status"]) {
+      for (Map<String, dynamic> element
+          in (response.data['data'] as List<dynamic>)) {
+        favorites.add(JobData.fromJson(element));
+      }
+    }
+    return [];
+  }
 }

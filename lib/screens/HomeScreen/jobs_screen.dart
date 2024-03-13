@@ -3,48 +3,76 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jobsque/Models/jobs.dart';
+import 'package:jobsque/Models/users.dart';
+import 'package:jobsque/providers/auth_provider.dart';
 import 'package:jobsque/providers/jobs_provider.dart';
 import 'package:jobsque/screens/HomeScreen/recent_jobs.dart';
 import 'package:jobsque/screens/HomeScreen/suggested_jobs_screen.dart';
 import 'package:jobsque/screens/Job%20Detail/job_detail.dart';
+import 'package:jobsque/screens/Notification/notification_screen.dart';
 import 'package:jobsque/screens/SearchScreens/search_screen.dart';
 
 final jobNotifier =
     ChangeNotifierProvider<JobsProvider>((ref) => JobsProvider());
+final authNotifier =
+    ChangeNotifierProvider<AuthProvider>((ref) => AuthProvider());
+List<JobData> favorites = [];
 
 class JobsScreen extends StatelessWidget {
   JobsScreen({super.key});
   Job? sj;
   List<JobData>? jobs;
-
+  Data? user;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Padding(
           padding: const EdgeInsets.all(10.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Text(
-                "Hi, User",
-                style: TextStyle(
-                  fontSize: 24,
-                ),
-              ),
-              const SizedBox(
-                height: 5,
-              ),
-              Text(
-                "Create a better future for yourself here",
-                style: TextStyle(fontSize: 14, color: Colors.grey.shade600),
-              )
-            ],
+          child: Consumer(
+            builder: (context, ref, _) {
+              final authChange = ref.watch(authNotifier);
+              return FutureBuilder(
+                future: Future.delayed(Duration.zero, () async {
+                  user = await authChange.getProfile();
+                }),
+                builder: (context, snapshot) {
+                  if (user == null) {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  } else {
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Hello ${user!.name}",
+                          style: const TextStyle(
+                            fontSize: 24,
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 5,
+                        ),
+                        Text(
+                          "Create a better future for yourself here",
+                          style: TextStyle(
+                              fontSize: 14, color: Colors.grey.shade600),
+                        )
+                      ],
+                    );
+                  }
+                },
+              );
+            },
           ),
         ),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => Notifications()));
+            },
             icon: const Icon(Icons.notifications_none_rounded),
             style: IconButton.styleFrom(
                 shape: CircleBorder(
@@ -93,9 +121,6 @@ class JobsScreen extends StatelessWidget {
                       ),
                     )),
               ),
-              const SizedBox(
-                height: 15,
-              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -111,9 +136,10 @@ class JobsScreen extends StatelessWidget {
                         Navigator.of(context).push(MaterialPageRoute(
                             builder: (context) => SuggestedJobsScreen()));
                       },
-                      child: const Text(
+                      child: Text(
                         "View all",
-                        style: TextStyle(color: Colors.blue, fontSize: 14),
+                        style: TextStyle(
+                            color: Colors.blue.shade900, fontSize: 14),
                       ))
                 ],
               ),
@@ -122,15 +148,24 @@ class JobsScreen extends StatelessWidget {
                     height: 180,
                     child: Consumer(builder: (context, ref, _) {
                       final jobChange = ref.watch(jobNotifier);
-
-                      Future.delayed(Duration.zero, () async {
-                        sj ??= await jobChange.getSJobs();
-                      });
-                      return PageView(children: [
-                        SuggestedJobItem(
-                          suggestedJob: sj,
-                        ),
-                      ]);
+                      return FutureBuilder(
+                        future: Future.delayed(Duration.zero, () async {
+                          sj ??= await jobChange.getSJobs();
+                        }),
+                        builder: (context, snapshot) {
+                          if (sj == null) {
+                            return const Center(
+                              child: CircularProgressIndicator(),
+                            );
+                          } else {
+                            return PageView(children: [
+                              SuggestedJobItem(
+                                suggestedJob: sj,
+                              ),
+                            ]);
+                          }
+                        },
+                      );
                     })),
               ),
               Row(
@@ -152,19 +187,29 @@ class JobsScreen extends StatelessWidget {
           ),
           Consumer(builder: (context, ref, _) {
             final jobChange = ref.watch(jobNotifier);
-            Future.delayed(Duration.zero, () async {
-              jobs ??= await jobChange.getAllJobs();
-            });
-            return Expanded(
-              flex: 1,
-              child: ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: jobs!.length,
-                  itemBuilder: (context, index) {
-                    return RecentJobItem(
-                      recentJob: jobs![index],
-                    );
-                  }),
+            return FutureBuilder(
+              future: Future.delayed(Duration.zero, () async {
+                jobs ??= await jobChange.getAllJobs();
+              }),
+              builder: (context, snapshot) {
+                if (jobs == null) {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                } else {
+                  return Expanded(
+                    flex: 1,
+                    child: ListView.builder(
+                        shrinkWrap: true,
+                        itemCount: jobs!.length,
+                        itemBuilder: (context, index) {
+                          return RecentJobItem(
+                            recentJob: jobs![index],
+                          );
+                        }),
+                  );
+                }
+              },
             );
           }),
         ]),
@@ -219,23 +264,31 @@ class _SuggestedJobItemState extends State<SuggestedJobItem> {
                   color: Colors.grey.shade400,
                   fontWeight: FontWeight.w400),
             ),
-            trailing: IconButton(
-              onPressed: () {
-                setState(() {
-                  isfavorite = !isfavorite;
+            trailing: Consumer(
+              builder: (context, ref, _) {
+                final jobChange = ref.watch(jobNotifier);
+                Future.delayed(Duration.zero, () async {
+                  await jobChange.addToFavorites(widget.suggestedJob!.data.id);
                 });
+                return IconButton(
+                  onPressed: () {
+                    setState(() {
+                      isfavorite = !isfavorite;
+                    });
+                  },
+                  icon: (!isfavorite)
+                      ? const Icon(
+                          Icons.turned_in_not_rounded,
+                          color: Colors.white,
+                          size: 30,
+                        )
+                      : const Icon(
+                          Icons.turned_in_rounded,
+                          color: Colors.white,
+                          size: 30,
+                        ),
+                );
               },
-              icon: (!isfavorite)
-                  ? const Icon(
-                      Icons.turned_in_not_rounded,
-                      color: Colors.white,
-                      size: 30,
-                    )
-                  : const Icon(
-                      Icons.turned_in_rounded,
-                      color: Colors.white,
-                      size: 30,
-                    ),
             ),
           ),
           const SizedBox(

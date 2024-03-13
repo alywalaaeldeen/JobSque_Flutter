@@ -1,5 +1,10 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:jobsque/Models/users.dart';
+import 'package:jobsque/providers/auth_provider.dart';
 import 'package:jobsque/screens/Login/login_screen.dart';
 import 'package:jobsque/screens/Profile/edit_profile_screen.dart';
 import 'package:jobsque/screens/Profile/language_screen.dart';
@@ -7,8 +12,12 @@ import 'package:jobsque/screens/Profile/login_and_security_screen.dart';
 import 'package:jobsque/screens/Profile/notification_screen.dart';
 import 'package:jobsque/screens/Profile/portfolio_screen.dart';
 
+final authNotifier =
+    ChangeNotifierProvider<AuthProvider>((ref) => AuthProvider());
+
 class ProfileScreen extends StatelessWidget {
-  const ProfileScreen({super.key});
+  ProfileScreen({super.key});
+  Data? user;
 
   @override
   Widget build(BuildContext context) {
@@ -43,32 +52,56 @@ class ProfileScreen extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Center(
-                    child: Column(
-                      children: [
-                        Container(
-                          width: 90,
-                          height: 90,
-                          decoration: const BoxDecoration(
-                              color: Colors.grey, shape: BoxShape.circle),
-                        ),
-                        const SizedBox(
-                          height: 15,
-                        ),
-                        const Text(
-                          "User Name",
-                          style: TextStyle(fontSize: 20),
-                        ),
-                        Text(
-                          "Job title",
-                          style: TextStyle(
-                              fontSize: 14, color: Colors.grey.shade500),
-                        ),
-                        const SizedBox(
-                          height: 25,
-                        ),
-                      ],
-                    ),
+                  Consumer(
+                    builder: (context, ref, child) {
+                      final authChange = ref.watch(authNotifier);
+                      return FutureBuilder(
+                        future: Future.delayed(Duration.zero, () async {
+                          user = await authChange.getProfile();
+                        }),
+                        builder: (context, snapshot) {
+                          if (user == null) {
+                            return const Center(
+                              child: CircularProgressIndicator(),
+                            );
+                          } else {
+                            return Center(
+                              child: Column(
+                                children: [
+                                  Container(
+                                    width: 90,
+                                    height: 90,
+                                    decoration: const BoxDecoration(
+                                      shape: BoxShape.circle,
+                                    ),
+                                    child: Image.asset(
+                                      "assets/peopleIcons/profilePicture2.png",
+                                      fit: BoxFit.fill,
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    height: 15,
+                                  ),
+                                  Text(
+                                    user!.name,
+                                    style: const TextStyle(fontSize: 20),
+                                  ),
+                                  Text(
+                                    user!.email,
+                                    style: TextStyle(
+                                        fontSize: 14,
+                                        color: Colors.grey.shade500),
+                                  ),
+                                  const SizedBox(
+                                    height: 25,
+                                  ),
+                                ],
+                              ),
+                            );
+                          }
+                        },
+                      );
+                    },
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
