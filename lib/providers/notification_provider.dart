@@ -11,8 +11,6 @@ final notificationProvider = ChangeNotifierProvider<NotificationProvider>(
 class NotificationProvider extends ChangeNotifier {
   Future<NotificationModel> getAllNotifications() async {
     String token = await LocalDatabase.getToken() as String;
-    print("Helllooooooo");
-    print(token);
 
     final dio = Dio();
     final response =

@@ -3,6 +3,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:jobsque/Database/local_database.dart';
+import 'package:jobsque/Models/applied_job.dart';
 import 'package:jobsque/Models/jobs.dart';
 
 class JobsProvider extends ChangeNotifier {
@@ -79,6 +80,28 @@ class JobsProvider extends ChangeNotifier {
           in (response.data['data'] as List<dynamic>)) {
         favorites.add(JobData.fromJson(element));
       }
+    }
+    return [];
+  }
+
+  Future<List<AppliedData>> getAppliedJobs() async {
+    List<AppliedData> appliedJobs = [];
+    String token = await LocalDatabase.getToken() as String;
+    final dio = Dio();
+    final response =
+        await dio.get("https://project2.amit-learning.com/api/apply/2",
+            options: Options(headers: {
+              "Authorization": "Bearer $token",
+              "Accept": "application/json",
+              "Connection": "keep-alive"
+            }));
+
+    if (response.data["status"]) {
+      for (Map<String, dynamic> element
+          in (response.data['data'] as List<dynamic>)) {
+        appliedJobs.add(AppliedData.fromJson(element));
+      }
+      return appliedJobs;
     }
     return [];
   }

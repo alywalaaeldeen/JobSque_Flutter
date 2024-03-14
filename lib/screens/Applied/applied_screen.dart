@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:jobsque/Models/applied_job.dart';
+import 'package:jobsque/providers/jobs_provider.dart';
+
+final jobNotifier =
+    ChangeNotifierProvider<JobsProvider>((ref) => JobsProvider());
+List<AppliedData> appliedJobs = [];
 
 class AppliedScreen extends StatefulWidget {
   const AppliedScreen({super.key});
@@ -19,92 +25,104 @@ class _AppliedScreenState extends State<AppliedScreen> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(10.0),
-        child: ListView(children: [
-          Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        index = 0;
-                      });
-                    },
-                    child: Container(
-                      alignment: Alignment.center,
-                      width: 150,
-                      height: 40,
-                      decoration: BoxDecoration(
+        child: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      index = 0;
+                    });
+                  },
+                  child: Container(
+                    alignment: Alignment.center,
+                    width: 150,
+                    height: 40,
+                    decoration: BoxDecoration(
+                        color: (index == 0)
+                            ? Colors.blue.shade800
+                            : Colors.grey.shade200,
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(20))),
+                    child: Text(
+                      "Active",
+                      style: TextStyle(
                           color: (index == 0)
-                              ? Colors.blue.shade800
-                              : Colors.grey.shade200,
-                          borderRadius:
-                              const BorderRadius.all(Radius.circular(20))),
-                      child: Text(
-                        "Active",
-                        style: TextStyle(
-                            color: (index == 0)
-                                ? Colors.white
-                                : Colors.grey.shade600),
-                      ),
+                              ? Colors.white
+                              : Colors.grey.shade600),
                     ),
                   ),
-                  GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        index = 1;
-                      });
-                    },
-                    child: Container(
-                      alignment: Alignment.center,
-                      width: 150,
-                      height: 40,
-                      decoration: BoxDecoration(
+                ),
+                GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      index = 1;
+                    });
+                  },
+                  child: Container(
+                    alignment: Alignment.center,
+                    width: 150,
+                    height: 40,
+                    decoration: BoxDecoration(
+                        color: (index == 1)
+                            ? Colors.blue.shade800
+                            : Colors.grey.shade200,
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(20))),
+                    child: Text(
+                      "Rejected",
+                      style: TextStyle(
                           color: (index == 1)
-                              ? Colors.blue.shade800
-                              : Colors.grey.shade200,
-                          borderRadius:
-                              const BorderRadius.all(Radius.circular(20))),
-                      child: Text(
-                        "Rejected",
-                        style: TextStyle(
-                            color: (index == 1)
-                                ? Colors.white
-                                : Colors.grey.shade600),
-                      ),
+                              ? Colors.white
+                              : Colors.grey.shade600),
                     ),
                   ),
-                ],
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 15,
+            ),
+            Expanded(
+              child: Consumer(
+                builder: (context, ref, _) {
+                  final jobChange = ref.watch(jobNotifier);
+                  return FutureBuilder(
+                    future: Future.delayed(Duration.zero, () async {
+                      appliedJobs = await jobChange.getAppliedJobs();
+                    }),
+                    builder: (context, snapshot) {
+                      return Expanded(
+                        flex: 1,
+                        child: ListView.builder(
+                          itemCount: appliedJobs.length,
+                          itemBuilder: (context, index) {
+                            return AppliedJobItem(
+                              appliedJob: appliedJobs[index],
+                            );
+                          },
+                        ),
+                      );
+                    },
+                  );
+                },
               ),
-              const SizedBox(
-                height: 15,
-              ),
-              const AppliedJobItem(
-                  jobName: "Google",
-                  jobLogo: "assets/images/google.svg",
-                  companyAndLocation: "Spectrum • Jakarta, Indonesia"),
-              const AppliedJobItem(
-                  jobName: "Google",
-                  jobLogo: "assets/images/google.svg",
-                  companyAndLocation: "Spectrum • Jakarta, Indonesia"),
-            ],
-          ),
-        ]),
+            )
+          ],
+        ),
       ),
     );
   }
 }
 
 class AppliedJobItem extends StatefulWidget {
-  const AppliedJobItem(
-      {super.key,
-      required this.jobName,
-      required this.jobLogo,
-      required this.companyAndLocation});
-  final String jobName;
-  final String jobLogo;
-  final String companyAndLocation;
+  const AppliedJobItem({
+    super.key,
+    required this.appliedJob,
+  });
+  final AppliedData appliedJob;
 
   @override
   State<AppliedJobItem> createState() => _AppliedJobItemState();
@@ -117,13 +135,14 @@ class _AppliedJobItemState extends State<AppliedJobItem> {
     return Column(
       children: [
         ListTile(
-          leading: SizedBox(
+          leading: const SizedBox(
             width: 40,
             height: 40,
-            child: SvgPicture.asset(widget.jobLogo),
+            child: Icon(Icons.work_rounded),
           ),
-          title: Text(widget.jobName),
-          subtitle: Text(widget.companyAndLocation),
+          title: Text(widget.appliedJob.name ?? ""),
+          subtitle: Text(
+              ((widget.appliedJob.accept) ?? false ? "Accepted" : "Pending")),
           trailing: IconButton(
               onPressed: () {
                 setState(() {
@@ -149,9 +168,9 @@ class _AppliedJobItemState extends State<AppliedJobItem> {
               decoration: BoxDecoration(
                   color: Colors.blue.shade100,
                   borderRadius: BorderRadius.circular(25)),
-              child: const Text(
-                "Fulltime",
-                style: TextStyle(color: Colors.blue),
+              child: Text(
+                widget.appliedJob.workType ?? "",
+                style: const TextStyle(color: Colors.blue),
               ),
             ),
             const SizedBox(
