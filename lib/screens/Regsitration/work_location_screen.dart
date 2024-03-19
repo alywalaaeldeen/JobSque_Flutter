@@ -123,7 +123,7 @@ class _CountryItemState extends State<CountryItem> {
       child: Container(
         padding: const EdgeInsets.all(8),
         decoration: ShapeDecoration(
-            color: (selected) ? Colors.blue : Colors.grey.shade400,
+            color: (selected) ? Colors.blue : Colors.grey.shade200,
             shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(10)))),
         child: Row(

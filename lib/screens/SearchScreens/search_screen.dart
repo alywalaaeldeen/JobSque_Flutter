@@ -3,7 +3,7 @@ import 'package:jobsque/screens/SearchScreens/empty_state.dart';
 import 'package:jobsque/screens/SearchScreens/result_screen.dart';
 import 'package:jobsque/screens/SearchScreens/searching_screen.dart';
 
-var jobSearch = ["UI/UX Designer"];
+var jobSearch = ["designer"];
 
 class SearchScreen extends StatelessWidget {
   const SearchScreen(
@@ -24,6 +24,7 @@ class SearchScreen extends StatelessWidget {
             child: Form(
               key: formKey,
               child: TextFormField(
+                controller: searchController,
                 validator: (value) {
                   while (value == null || value.isEmpty) {
                     return "Please Type Something.";
@@ -31,7 +32,6 @@ class SearchScreen extends StatelessWidget {
                   return null;
                 },
                 onFieldSubmitted: (value) {
-                  // initiate a connection with API to retrieve all jobs with the provided value.
                   if (formKey.currentState!.validate()) {
                     if (jobSearch.contains(searchController.text)) {
                       Navigator.of(context).push(MaterialPageRoute(
@@ -51,7 +51,6 @@ class SearchScreen extends StatelessWidget {
                   }
                 },
                 keyboardType: TextInputType.text,
-                controller: searchController,
                 decoration: InputDecoration(
                     label: Text(
                       "Type Something...",

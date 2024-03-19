@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:jobsque/providers/auth_provider.dart';
 import 'package:jobsque/screens/Login/login_screen.dart';
+import 'package:jobsque/screens/Regsitration/work_type_screen.dart';
 
 final TextEditingController nameController = TextEditingController();
 final TextEditingController emailController = TextEditingController();
@@ -68,7 +69,7 @@ class _CreateAccountState extends State<CreateAccount> {
                                       BorderRadius.all(Radius.circular(10)))),
                           validator: (value) {
                             if (value == null || value.isEmpty) {
-                              return "This field is requiered";
+                              return "This field is required";
                             }
                             return null;
                           },
@@ -87,7 +88,7 @@ class _CreateAccountState extends State<CreateAccount> {
                                       BorderRadius.all(Radius.circular(10)))),
                           validator: (value) {
                             if (value == null || value.isEmpty) {
-                              return "This field is requiered";
+                              return "This field is required";
                             }
                             return null;
                           },
@@ -115,11 +116,11 @@ class _CreateAccountState extends State<CreateAccount> {
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(10)))),
                           validator: (value) {
-                            if (value == null) {
+                            if (value == null || value.isEmpty) {
                               return "This field is required";
-                            } /*else if (value.length < 8) {
-                              return "Password must be at least 8 characters";
-                            }*/
+                            } else if (value.length < 6) {
+                              return "Password must be at least 6 characters";
+                            }
                             return null;
                           },
                           autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -155,7 +156,11 @@ class _CreateAccountState extends State<CreateAccount> {
                         ),
                         ElevatedButton(
                           onPressed: () {
-                            AuthProvider().register(context);
+                            if (_formKey.currentState!.validate()) {
+                              AuthProvider().register(context);
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => const WorkType()));
+                            }
                           },
                           style: ElevatedButton.styleFrom(
                               minimumSize: const Size(327, 48),

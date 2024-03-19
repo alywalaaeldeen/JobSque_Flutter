@@ -13,6 +13,7 @@ class _WorkTypeState extends State<WorkType> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(),
       body: Padding(
         padding: const EdgeInsets.only(left: 30, right: 30, top: 40),
         child: ListView(children: [
@@ -77,7 +78,7 @@ class _WorkTypeState extends State<WorkType> {
                 ],
               ),
               const SizedBox(
-                height: 80,
+                height: 60,
               ),
               ElevatedButton(
                   onPressed: () {

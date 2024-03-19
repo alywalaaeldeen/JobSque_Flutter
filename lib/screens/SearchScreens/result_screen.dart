@@ -23,11 +23,15 @@ class _ResultScreenState extends State<ResultScreen> {
                 IconButton(
                     onPressed: () {},
                     icon: const Icon(Icons.filter_alt_rounded)),
-                const FilterItem(),
+                const FilterItem(
+                  filterName: "Fulltime",
+                ),
                 const SizedBox(
                   width: 10,
                 ),
-                const FilterItem(),
+                const FilterItem(
+                  filterName: "OnSite",
+                ),
               ],
             ),
           ),
@@ -37,15 +41,15 @@ class _ResultScreenState extends State<ResultScreen> {
                 //replace the static values with real ones retrieved from API.
                 ResultItem(
                     jobName: "UI/UX Designer",
-                    companyLogo: "assets/images/twitter.svg",
-                    companyAndLocation: "Twitter • Jakarta, Indonesia "),
+                    companyLogo: "assets/images/Facebook.svg",
+                    companyAndLocation: "Facebook • Chicago, USA "),
                 ResultItem(
                     jobName: "UI/UX Designer",
-                    companyLogo: "assets/images/twitter.svg",
-                    companyAndLocation: "Twitter • Jakarta, Indonesia "),
+                    companyLogo: "assets/images/google.svg",
+                    companyAndLocation: "Google • Tokyo, Japan "),
                 ResultItem(
                     jobName: "UI/UX Designer",
-                    companyLogo: "assets/images/twitter.svg",
+                    companyLogo: "assets/images/TwitterLogo.svg",
                     companyAndLocation: "Twitter • Jakarta, Indonesia "),
               ],
             ),
@@ -57,7 +61,8 @@ class _ResultScreenState extends State<ResultScreen> {
 }
 
 class FilterItem extends StatefulWidget {
-  const FilterItem({super.key});
+  const FilterItem({super.key, required this.filterName});
+  final String filterName;
 
   @override
   State<FilterItem> createState() => _FilterItemState();
@@ -77,11 +82,11 @@ class _FilterItemState extends State<FilterItem> {
         dropdownColor: Colors.blue.shade800,
         iconEnabledColor: Colors.white,
         borderRadius: BorderRadius.circular(10),
-        items: const [
+        items: [
           DropdownMenuItem(
               child: Text(
-            "Full time",
-            style: TextStyle(
+            widget.filterName,
+            style: const TextStyle(
               color: Colors.white,
               fontSize: 12,
             ),
@@ -119,7 +124,6 @@ class _ResultItemState extends State<ResultItem> {
             width: 40,
             height: 40,
             decoration: const BoxDecoration(
-                color: Color.fromARGB(255, 102, 144, 255),
                 borderRadius: BorderRadius.all(Radius.circular(10))),
             child: SizedBox(
                 width: 32,

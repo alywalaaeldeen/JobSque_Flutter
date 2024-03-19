@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:jobsque/screens/HomeScreen/applied_home_screen.dart';
+import 'package:jobsque/screens/HomeScreen/home_screen.dart';
 
 class SuccessfullScreen extends StatelessWidget {
   const SuccessfullScreen({super.key});
@@ -38,9 +39,7 @@ class SuccessfullScreen extends StatelessWidget {
                 onPressed: () {
                   Navigator.of(context).pushAndRemoveUntil(
                       MaterialPageRoute(
-                          builder: (context) => const AppliedHomeScreen(
-                                isAccepted: false,
-                              )),
+                          builder: (context) => const HomeScreen()),
                       (route) => false);
                 },
                 style: ElevatedButton.styleFrom(

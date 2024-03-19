@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:jobsque/screens/Login/login_screen.dart';
+import 'package:jobsque/screens/onboarding_screens.dart/onboarding_screen.dart';
 import 'package:page_transition/page_transition.dart';
 
 class SplashScreen extends StatelessWidget {
@@ -14,7 +15,7 @@ class SplashScreen extends StatelessWidget {
           width: 150,
           height: 40,
           child: SvgPicture.asset("assets/images/Logo.svg")),
-      nextScreen: const LoginScreen(),
+      nextScreen: const OnBoardingScreen(),
       splashTransition: SplashTransition.fadeTransition,
       pageTransitionType: PageTransitionType.fade,
     );
